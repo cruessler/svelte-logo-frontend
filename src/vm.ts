@@ -13,8 +13,15 @@ type Entry =
   | { type: "Output"; output: string }
   | { type: "Error"; error: string };
 
+interface Turtle {
+  x: number;
+  y: number;
+  direction: number;
+}
+
 interface Environment {
   history: Entry[];
+  turtle: Turtle;
 }
 
 export interface Vm {

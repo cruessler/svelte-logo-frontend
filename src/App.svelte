@@ -1,21 +1,36 @@
 <script lang="typescript">
+  import Canvas from "./Canvas.svelte";
   import Examples from "./Examples.svelte";
   import Machine from "./Machine.svelte";
   import Terminal from "./Terminal.svelte";
   import type { Vm } from "./vm";
+
+  interface Size {
+    width: number;
+    height: number;
+  }
 
   export let worker: Worker;
   let vm: Vm = {
     stack: [],
     instructions: [],
     scopes: [],
-    environment: { history: [] },
+    environment: {
+      history: [],
+      turtle: { x: 0, y: 0, direction: 0 },
+    },
     programCounter: 0,
   };
 
   worker.addEventListener("message", (event) => {
     vm = event.data;
     vm.environment.history.reverse();
+  });
+
+  let size: Size = { width: window.innerWidth, height: window.innerHeight };
+
+  window.addEventListener("resize", () => {
+    size = { width: window.innerWidth, height: window.innerHeight };
   });
 
   let prompt = "";
@@ -98,6 +113,7 @@
 </style>
 
 <main>
+  <Canvas {vm} {size} />
   <div id="overlay">
     <div id="overlay-left">
       <Terminal bind:prompt {vm} {onCompile} {onStep} {onContinue} />
