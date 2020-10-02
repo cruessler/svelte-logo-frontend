@@ -104,7 +104,7 @@ foreach range 99 1 [verse ?1 (print ")]`,
     ],
   ];
 
-  export let onClick;
+  export let onClick: (_: string) => void;
 </script>
 
 <style>

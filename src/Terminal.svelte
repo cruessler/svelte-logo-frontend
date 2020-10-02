@@ -1,5 +1,11 @@
 <script lang="typescript">
-  export let prompt;
+  import type { Vm } from "./vm";
+
+  export let prompt: string;
+  export let vm: Vm;
+  export let onCompile: () => void;
+  export let onStep: () => void;
+  export let onContinue: () => void;
 </script>
 
 <style>
@@ -49,16 +55,42 @@
   button {
     margin-left: 10px;
   }
+
+  li {
+    white-space: pre-wrap;
+  }
+  li.input {
+    color: rgba(247, 248, 242, 0.7);
+  }
+  li.input:before {
+    content: "> ";
+  }
+  li.error {
+    color: rgb(248, 80, 80);
+  }
+  li.error:before {
+    content: "! ";
+  }
 </style>
 
 <div id="terminal">
   <div id="history">
-    <ul id="entries" />
+    <ul id="entries">
+      {#each vm.environment.history as entry}
+        {#if entry.type === 'Input'}
+          <li class="input">{entry.input}</li>
+        {:else if entry.type === 'Output'}
+          <li class="output">{entry.output}</li>
+        {:else if entry.type === 'Error'}
+          <li class="error">{entry.error}</li>
+        {/if}
+      {/each}
+    </ul>
     <textarea id="prompt" bind:value={prompt} />
   </div>
   <div id="controls">
-    <button>Compile</button>
-    <button>Step</button>
-    <button>Continue</button>
+    <button on:click={onCompile}>Compile</button>
+    <button on:click={onStep}>Step</button>
+    <button on:click={onContinue}>Continue</button>
   </div>
 </div>

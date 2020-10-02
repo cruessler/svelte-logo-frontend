@@ -2,11 +2,38 @@
   import Examples from "./Examples.svelte";
   import Machine from "./Machine.svelte";
   import Terminal from "./Terminal.svelte";
+  import type { Vm } from "./vm";
+
+  export let worker: Worker;
+  let vm: Vm = {
+    stack: [],
+    instructions: [],
+    scopes: [],
+    environment: { history: [] },
+    programCounter: 0,
+  };
+
+  worker.addEventListener("message", (event) => {
+    vm = event.data;
+    vm.environment.history.reverse();
+  });
 
   let prompt = "";
 
   const onClick = (code: string) => {
     prompt = code;
+  };
+
+  const onCompile = () => {
+    worker.postMessage({ type: "Compile", source: prompt });
+  };
+
+  const onStep = () => {
+    worker.postMessage({ type: "Step" });
+  };
+
+  const onContinue = () => {
+    worker.postMessage({ type: "Continue" });
   };
 </script>
 
@@ -73,9 +100,9 @@
 <main>
   <div id="overlay">
     <div id="overlay-left">
-      <Terminal bind:prompt />
+      <Terminal bind:prompt {vm} {onCompile} {onStep} {onContinue} />
       <Examples {onClick} />
     </div>
-    <Machine />
+    <Machine {vm} />
   </div>
 </main>
