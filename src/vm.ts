@@ -19,8 +19,28 @@ interface Turtle {
   direction: number;
 }
 
+interface Vec2 {
+  x: number;
+  y: number;
+}
+
+export interface Color {
+  red: number;
+  green: number;
+  blue: number;
+  alpha: number;
+}
+
+interface Line {
+  type: "Line";
+  start: Vec2;
+  end: Vec2;
+  color: Color;
+}
+
 interface Environment {
   history: Entry[];
+  objects: Line[];
   turtle: Turtle;
 }
 

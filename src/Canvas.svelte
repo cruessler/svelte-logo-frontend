@@ -1,5 +1,5 @@
 <script lang="typescript">
-  import type { Vm } from "./vm";
+  import type { Vm, Color } from "./vm";
   import { mat4, vec3 } from "gl-matrix";
 
   interface Size {
@@ -38,6 +38,10 @@
 
     return transformedPoints.map(([x, y]) => `${x},${y}`).join(" ");
   };
+
+  const getRgba = ({ red, green, blue, alpha }: Color) => {
+    return `rgba(${red * 255.0}, ${green * 255.0}, ${blue * 255.0}, ${alpha})`;
+  };
 </script>
 
 <style>
@@ -53,7 +57,16 @@
 </style>
 
 <div>
-  <svg viewBox={getViewBox(size)}><polygon
+  <svg viewBox={getViewBox(size)}>
+    {#each vm.environment.objects as object}
+      {#if object.type === 'Line'}
+        <polyline
+          fill="none"
+          stroke={getRgba(object.color)}
+          points={`${object.start.x},${object.start.y} ${object.end.x},${object.end.y}`} />
+      {/if}
+    {/each}
+    <polygon
       id="turtle"
       points={getTurtlePoints(vm.environment.turtle)} /></svg>
 </div>

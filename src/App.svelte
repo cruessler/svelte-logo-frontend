@@ -17,6 +17,7 @@
     scopes: [],
     environment: {
       history: [],
+      objects: [],
       turtle: { x: 0, y: 0, direction: 0 },
     },
     programCounter: 0,
