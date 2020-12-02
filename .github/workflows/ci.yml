@@ -21,7 +21,7 @@ jobs:
         run: npm ci
 
       - name: Build assets
-        run: npm build
+        run: npm run build
 
       - name: Check formatting
         run: |
