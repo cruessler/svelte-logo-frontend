@@ -40,6 +40,10 @@
     prompt = code;
   };
 
+  const onRun = () => {
+    worker.postMessage({ type: "Run", source: prompt });
+  };
+
   const onCompile = () => {
     worker.postMessage({ type: "Compile", source: prompt });
   };
@@ -117,7 +121,7 @@
   <Canvas {vm} {size} />
   <div id="overlay">
     <div id="overlay-left">
-      <Terminal bind:prompt {vm} {onCompile} {onStep} {onContinue} />
+      <Terminal bind:prompt {vm} {onRun} {onCompile} {onStep} {onContinue} />
       <Examples {onClick} />
     </div>
     <Machine {vm} />
