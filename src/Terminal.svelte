@@ -3,6 +3,7 @@
 
   export let prompt: string;
   export let vm: Vm;
+  export let onRun: () => void;
   export let onCompile: () => void;
   export let onStep: () => void;
   export let onContinue: () => void;
@@ -89,6 +90,7 @@
     <textarea id="prompt" bind:value={prompt} />
   </div>
   <div id="controls">
+    <button on:click={onRun}>Run</button>
     <button on:click={onCompile}>Compile</button>
     <button on:click={onStep}>Step</button>
     <button on:click={onContinue}>Continue</button>
