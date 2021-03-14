@@ -5,14 +5,17 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public",
-    "validate": "svelte-check"
+    "validate": "svelte-check",
+    "load-worker": "node bin/loadWorker.mjs"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-node-resolve": "^8.0.0",
     "@rollup/plugin-typescript": "^8.1.0",
     "@tsconfig/svelte": "^1.0.0",
+    "cheerio": "^1.0.0-rc.5",
     "gl-matrix": "^3.3.0",
+    "node-fetch": "^2.6.1",
     "prettier": "^2.2.1",
     "prettier-plugin-svelte": "^1.4.0",
     "rollup": "^2.3.4",
