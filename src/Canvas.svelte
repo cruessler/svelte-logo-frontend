@@ -1,6 +1,7 @@
 <script lang="typescript">
   import type { Vm, Color } from "./vm";
   import { mat4, vec3 } from "gl-matrix";
+  import { draw } from "svelte/transition";
 
   interface Size {
     width: number;
@@ -61,6 +62,7 @@
     {#each vm.environment.objects as object (object.id)}
       {#if object.type === 'Line'}
         <polyline
+          transition:draw
           fill="none"
           stroke={getRgba(object.color)}
           points={`${object.start.x},${object.start.y} ${object.end.x},${object.end.y}`} />
