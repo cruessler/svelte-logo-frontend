@@ -77,7 +77,7 @@
 <div id="terminal">
   <div id="history">
     <ul id="entries">
-      {#each vm.environment.history as entry}
+      {#each vm.environment.history as entry (entry.id)}
         {#if entry.type === 'Input'}
           <li class="input">{entry.input}</li>
         {:else if entry.type === 'Output'}
