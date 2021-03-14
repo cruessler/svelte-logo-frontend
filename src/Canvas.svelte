@@ -58,7 +58,7 @@
 
 <div>
   <svg viewBox={getViewBox(size)}>
-    {#each vm.environment.objects as object}
+    {#each vm.environment.objects as object (object.id)}
       {#if object.type === 'Line'}
         <polyline
           fill="none"

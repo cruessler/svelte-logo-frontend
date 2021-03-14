@@ -8,10 +8,10 @@ type Scope =
   | { type: "Template"; current: Binding; rest: string }
   | { type: "Loop"; current: number };
 
-type Entry =
-  | { type: "Input"; input: string }
-  | { type: "Output"; output: string }
-  | { type: "Error"; error: string };
+export type Entry =
+  | { type: "Input"; id: number; input: string }
+  | { type: "Output"; id: number; output: string }
+  | { type: "Error"; id: number; error: string };
 
 interface Turtle {
   x: number;
@@ -33,6 +33,7 @@ export interface Color {
 
 interface Line {
   type: "Line";
+  id: number;
   start: Vec2;
   end: Vec2;
   color: Color;
