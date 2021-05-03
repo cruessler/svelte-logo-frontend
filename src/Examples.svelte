@@ -107,6 +107,15 @@ foreach range 99 1 [verse ?1 (print ")]`,
   export let onClick: (_: string) => void;
 </script>
 
+<div id="examples">
+  <h1>Examples</h1>
+  <ul>
+    {#each examples as [title, code]}
+      <li><button on:click={() => onClick(code)}>{title}</button></li>
+    {/each}
+  </ul>
+</div>
+
 <style>
   #examples {
     grid-area: examples;
@@ -136,12 +145,3 @@ foreach range 99 1 [verse ?1 (print ")]`,
     font-size: smaller;
   }
 </style>
-
-<div id="examples">
-  <h1>Examples</h1>
-  <ul>
-    {#each examples as [title, code]}
-      <li><button on:click={() => onClick(code)}>{title}</button></li>
-    {/each}
-  </ul>
-</div>

@@ -9,6 +9,29 @@
   export let onContinue: () => void;
 </script>
 
+<div id="terminal">
+  <div id="history">
+    <ul id="entries">
+      {#each vm.environment.history as entry (entry.id)}
+        {#if entry.type === "Input"}
+          <li class="input">{entry.input}</li>
+        {:else if entry.type === "Output"}
+          <li class="output">{entry.output}</li>
+        {:else if entry.type === "Error"}
+          <li class="error">{entry.error}</li>
+        {/if}
+      {/each}
+    </ul>
+    <textarea id="prompt" bind:value={prompt} />
+  </div>
+  <div id="controls">
+    <button on:click={onRun}>Run</button>
+    <button on:click={onCompile}>Compile</button>
+    <button on:click={onStep}>Step</button>
+    <button on:click={onContinue}>Continue</button>
+  </div>
+</div>
+
 <style>
   #terminal {
     grid-area: terminal;
@@ -73,26 +96,3 @@
     content: "! ";
   }
 </style>
-
-<div id="terminal">
-  <div id="history">
-    <ul id="entries">
-      {#each vm.environment.history as entry (entry.id)}
-        {#if entry.type === 'Input'}
-          <li class="input">{entry.input}</li>
-        {:else if entry.type === 'Output'}
-          <li class="output">{entry.output}</li>
-        {:else if entry.type === 'Error'}
-          <li class="error">{entry.error}</li>
-        {/if}
-      {/each}
-    </ul>
-    <textarea id="prompt" bind:value={prompt} />
-  </div>
-  <div id="controls">
-    <button on:click={onRun}>Run</button>
-    <button on:click={onCompile}>Compile</button>
-    <button on:click={onStep}>Step</button>
-    <button on:click={onContinue}>Continue</button>
-  </div>
-</div>
