@@ -57,6 +57,17 @@
   };
 </script>
 
+<main>
+  <Canvas {vm} {size} />
+  <div id="overlay">
+    <div id="overlay-left">
+      <Terminal bind:prompt {vm} {onRun} {onCompile} {onStep} {onContinue} />
+      <Examples {onClick} />
+    </div>
+    <Machine {vm} />
+  </div>
+</main>
+
 <style>
   :global(:root) {
     --primary-color: rgb(248, 248, 242);
@@ -116,14 +127,3 @@
     box-shadow: 5px 5px 5px 0 rgb(201, 199, 199);
   }
 </style>
-
-<main>
-  <Canvas {vm} {size} />
-  <div id="overlay">
-    <div id="overlay-left">
-      <Terminal bind:prompt {vm} {onRun} {onCompile} {onStep} {onContinue} />
-      <Examples {onClick} />
-    </div>
-    <Machine {vm} />
-  </div>
-</main>

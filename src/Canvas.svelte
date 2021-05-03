@@ -45,6 +45,22 @@
   };
 </script>
 
+<div>
+  <svg viewBox={getViewBox(size)}>
+    {#each vm.environment.objects as object (object.id)}
+      {#if object.type === "Line"}
+        <polyline
+          transition:draw
+          fill="none"
+          stroke={getRgba(object.color)}
+          points={`${object.start.x},${object.start.y} ${object.end.x},${object.end.y}`}
+        />
+      {/if}
+    {/each}
+    <polygon id="turtle" points={getTurtlePoints(vm.environment.turtle)} /></svg
+  >
+</div>
+
 <style>
   div {
     width: 100%;
@@ -56,19 +72,3 @@
     stroke: black;
   }
 </style>
-
-<div>
-  <svg viewBox={getViewBox(size)}>
-    {#each vm.environment.objects as object (object.id)}
-      {#if object.type === 'Line'}
-        <polyline
-          transition:draw
-          fill="none"
-          stroke={getRgba(object.color)}
-          points={`${object.start.x},${object.start.y} ${object.end.x},${object.end.y}`} />
-      {/if}
-    {/each}
-    <polygon
-      id="turtle"
-      points={getTurtlePoints(vm.environment.turtle)} /></svg>
-</div>
