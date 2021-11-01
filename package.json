@@ -14,7 +14,7 @@
     "@rollup/plugin-typescript": "^8.2.1",
     "@tsconfig/svelte": "^2.0.1",
     "cheerio": "^1.0.0-rc.5",
-    "gl-matrix": "^3.3.0",
+    "gl-matrix": "^3.4.3",
     "node-fetch": "^2.6.1",
     "prettier": "^2.3.2",
     "prettier-plugin-svelte": "^2.3.1",
